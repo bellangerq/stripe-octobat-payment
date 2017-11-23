@@ -1,4 +1,4 @@
-# Cactomain technical test
+# Technical test
 
 ...
 
