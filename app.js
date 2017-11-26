@@ -1,31 +1,34 @@
-// Imports
-const express = require('express');
-const app = express();
+// REQUIRE
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+const app = require("express")();
+const stripe = require("stripe")(keySecret);
 
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "pug");
+app.use(require("body-parser").urlencoded({extended: false}));
 
-require('dotenv').config()
-const stripe = require("stripe")(process.env.STRIPE_API_KEY);
-
-// Routes
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+// ROUTES
+app.get("/", (req, res) => {
+  res.render("index.pug", {keyPublishable})
 });
 
-app.post('/payment', (req, res) => {
-  // Retrieve forms inputs
-  const amount = req.body.amount * 100;
+app.post("/charge", (req, res) => {
+  let amount = 500;
 
-  // Create Stripe charge
-  stripe.charges.create({
-    amount: amount,
-    currency: "zq",
-    source: "tok_mastercard"
+  stripe.customers.create({
+     email: req.body.stripeEmail,
+    source: req.body.stripeToken
   })
-
+  .then(customer =>
+    stripe.charges.create({
+      amount,
+      currency: "eur",
+      customer: customer.id
+    }))
+  .then(charge => console.log(`Charge: ${charge.id}`))
+  .catch(err => {
+    console.log(`Error: ${err}`);
+  });
 });
 
-// Local server
-app.listen(3000, () => console.log('Example app listening on port 3000!'));
+app.listen(3000);
