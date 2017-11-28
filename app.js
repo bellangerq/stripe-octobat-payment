@@ -36,7 +36,7 @@ const createCharge = (token) => {
   stripe.charges.create({
     amount: 2000,
     currency: 'eur',
-    source: token, // replace with token
+    source: "tok_visa", // doesn't work with `token`
   })
   .then(charge => {
     console.log(`Charge: ${charge.id}`);
