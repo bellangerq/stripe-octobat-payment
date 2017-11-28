@@ -26,8 +26,11 @@ node app.js
 
 1. **STRIPE**
   - [x] Create Stripe token
-  - [ ] Create Stripe charge (associate token to charge)
+  - [x] Create Stripe charge
+  - [ ] Associate token to charge
   - [ ] Show Stripe charge token if success (`.then`)
   - [ ] Show status if error (`.catch`)
+  - [ ] Create form view
+  - [ ] Pass query parameters to Stripe token
 2. **OCTOBAT**
 3. **FRONT**
