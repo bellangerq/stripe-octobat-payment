@@ -1,6 +1,6 @@
 # Technical test
 
-Node JS technical test with Strip & Octobar APIs.
+Node JS technical test with Stripe & Octobat APIs.
 
 ## Install
 
@@ -23,18 +23,11 @@ node app.js
 ```
 
 ## Roadmap
+
 1. **STRIPE**
-  - [ ] Create Stripe source (with fake credit card)
-  - [ ] Create Stripe charge
-  - [ ] Associate source to charge
-  - [ ] Retrieve inputs values to create credit card (validates format & presence)
-  - [ ] Handle errors
+  - [x] Create Stripe token
+  - [ ] Create Stripe charge (associate token to charge)
   - [ ] Show Stripe charge token if success (`.then`)
   - [ ] Show status if error (`.catch`)
 2. **OCTOBAT**
-  - [ ] Create compute function (takes one parameter == integer)
-  - [ ] Call function before Stripe charge creation
-  - [ ] To be completed...
-
 3. **FRONT**
-  - [ ] Style form (inputs, errors...)

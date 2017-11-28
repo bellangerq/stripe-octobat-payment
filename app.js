@@ -1,34 +1,35 @@
 // REQUIRE
+require('dotenv').config()
 const keyPublishable = process.env.PUBLISHABLE_KEY;
 const keySecret = process.env.SECRET_KEY;
 const app = require("express")();
 const stripe = require("stripe")(keySecret);
 
-app.set("view engine", "pug");
-app.use(require("body-parser").urlencoded({extended: false}));
-
 // ROUTES
 app.get("/", (req, res) => {
-  res.render("index.pug", {keyPublishable})
+  generateToken("4242424242424242", 12, 21, "123");
 });
 
 app.post("/charge", (req, res) => {
-  let amount = 500;
-
-  stripe.customers.create({
-     email: req.body.stripeEmail,
-    source: req.body.stripeToken
-  })
-  .then(customer =>
-    stripe.charges.create({
-      amount,
-      currency: "eur",
-      customer: customer.id
-    }))
-  .then(charge => console.log(`Charge: ${charge.id}`))
-  .catch(err => {
-    console.log(`Error: ${err}`);
-  });
+  // https://stripe.com/docs/recipes/custom-checkout
 });
 
 app.listen(3000);
+
+// Generate a card token
+const generateToken = (number, exp_month, exp_year, cvc) => {
+  stripe.tokens.create({
+    card: {
+      number,
+      exp_month,
+      exp_year,
+      cvc
+    }
+  })
+  .then(token => {
+    console.log(`Token: ${token.id}`);
+  })
+  .catch(err => {
+    console.log(`Error: ${err}`);
+  });
+};
