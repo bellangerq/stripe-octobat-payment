@@ -16,6 +16,13 @@ Install Node dependencies:
 npm install
 ```
 
+Create a `.env` file and store your Stripe keys (with [dotenv](https://github.com/motdotla/dotenv)):
+
+```
+PUBLISHABLE_KEY=pk_test_******
+SECRET_KEY=sk_test_******
+
+```
 Launch local server and visit `localhost:3000`:
 
 ```
