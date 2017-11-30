@@ -6,44 +6,27 @@ const app = require('express')()
 const bodyParser = require('body-parser')
 const stripe = require('stripe')(keySecret)
 
-app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json()) // for parsing application/json
 
-// Used for testing purpose
-const testParams = {
-  number: '4242 4242 4242 4242',
-  expMonth: 12,
-  expYear: 21,
-  cvc: '123'
-}
+app.set('view engine', 'pug')
 
 // Routes
-app.get('/', (req, res) =>
-  generateToken(testParams) // Using test params, we should use `req.params`
-    .then(createCharge)
-    .then(charge => res.status(201).send({ charge }))
-    .catch(error => res.status(422).send({ error }))
-)
+app.get('/', (req, res) => res.render('index'))
 
-/*
-  POST '/'
-  {
-    "number": "4242 4242 4242 4242",
-    "expMonth": 12,
-    "expYear": 21,
-    "cvc": "123"
-  }
+app.post('/charge', (req, res) =>
 
-  Example :
+  // Pass form params to create new token
+  generateToken({
+    number: req.body.number,
+    expMonth: req.body.expMonth,
+    expYear: req.body.expYear,
+    cvc: req.body.cvc
+  })
+    // Create charge with form amount field
+    .then(token => createCharge(token, req.body.amount))
 
-  curl -i \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{ "number": "4242 4242 4242 4242", "expMonth": 12, "expYear": 21, "cvc": "123" }' \
-    'http://localhost:3000'
-*/
-app.post('/', (req, res) =>
-  generateToken(req.body)
-    .then(createCharge)
+    // Render result
     .then(charge => res.status(201).json({ charge }))
     .catch(error => res.status(422).json({ error }))
 )
@@ -62,9 +45,27 @@ const generateToken = ({ number, expMonth, expYear, cvc }) =>
   })
 
 // Create charge with card token
-const createCharge = token =>
+const createCharge = (token, amount) =>
   stripe.charges.create({
-    amount: 2000,
+    amount: amount,
     currency: 'eur',
     source: token.id
   })
+
+/*
+  POST '/'
+  {
+    "number": "4242 4242 4242 4242",
+    "expMonth": 12,
+    "expYear": 21,
+    "cvc": "123"
+  }
+
+  Example :
+
+  curl -i \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{ "number": "4242 4242 4242 4242", "expMonth": 12, "expYear": 21, "cvc": "123" }' \
+    'http://localhost:3000'
+*/

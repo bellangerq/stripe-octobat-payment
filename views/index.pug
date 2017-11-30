@@ -1,0 +1,13 @@
+html
+  head
+    title= title
+  body
+    h1= message
+    
+    form(action='/charge', method='post')
+      input(type='text', name='number', placeholder='4242 4242 4242 4242' value='4242 4242 4242 4242')
+      input(type='text', name='cvc', placeholder='CVC' value='123')
+      input(type='number', name='expMonth', placeholder='Expiration month' value='10')
+      input(type='number', name='expYear', placeholder='Expiration year' value='23')
+      input(type='text', name='amount', placeholder='Amount' value='300')
+      input(type='submit')
