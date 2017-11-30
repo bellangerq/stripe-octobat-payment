@@ -8,6 +8,7 @@ const stripe = require('stripe')(keySecret)
 
 app.use(bodyParser.json()); // for parsing application/json
 
+// Used for testing purpose
 const testParams = {
   number: '4242 4242 4242 4242',
   expMonth: 12,
@@ -41,7 +42,7 @@ app.get('/', (req, res) =>
     'http://localhost:3000'
 */
 app.post('/', (req, res) =>
-  generateToken(req.body) // Using test params, we should use `req.params`
+  generateToken(req.body)
     .then(createCharge)
     .then(charge => res.status(201).json({ charge }))
     .catch(error => res.status(422).json({ error }))
