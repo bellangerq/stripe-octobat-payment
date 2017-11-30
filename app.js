@@ -1,47 +1,42 @@
 // Requires
 require('dotenv').config()
-const keyPublishable = process.env.PUBLISHABLE_KEY;
-const keySecret = process.env.SECRET_KEY;
-const app = require('express')();
-const stripe = require('stripe')(keySecret);
+const keyPublishable = process.env.PUBLISHABLE_KEY
+const keySecret = process.env.SECRET_KEY
+const app = require('express')()
+const stripe = require('stripe')(keySecret)
+
+const params = {
+  number: '4242 4242 4242 4242',
+  expMonth: 12,
+  expYear: 21,
+  cvc: '123'
+}
 
 // Routes
-app.get('/', (req, res) => {
-  generateToken('4242 4242 4242 4242', 12, 21, '123');
-});
+app.get('/', (req, res) =>
+  generateToken(params)
+    .then(createCharge)
+    .then(token => res.status(201).send({ token }))
+    .catch(error => res.status(422).send({ error }))
+)
 
-app.listen(3000);
+app.listen(3000)
 
 // Generate a card token
-const generateToken = (number, exp_month, exp_year, cvc) => {
+const generateToken = ({ number, expMonth, expYear, cvc }) =>
   stripe.tokens.create({
     card: {
       number,
-      exp_month,
-      exp_year,
+      exp_month: expMonth,
+      exp_year: expYear,
       cvc
     }
   })
-  .then(token => {
-    console.log(`Token: ${token.id}`);
-    createCharge(token);
-  })
-  .catch(err => {
-    console.log(`Error: ${err}`);
-  });
-};
 
 // Create charge with card token
-const createCharge = (token) => {
+const createCharge = token =>
   stripe.charges.create({
     amount: 2000,
     currency: 'eur',
-    source: "tok_visa", // doesn't work with `token`
+    source: token
   })
-  .then(charge => {
-    console.log(`Charge: ${charge.id}`);
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
