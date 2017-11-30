@@ -1,47 +1,70 @@
 // Requires
 require('dotenv').config()
-const keyPublishable = process.env.PUBLISHABLE_KEY;
-const keySecret = process.env.SECRET_KEY;
-const app = require('express')();
-const stripe = require('stripe')(keySecret);
+const keyPublishable = process.env.PUBLISHABLE_KEY
+const keySecret = process.env.SECRET_KEY
+const app = require('express')()
+const bodyParser = require('body-parser')
+const stripe = require('stripe')(keySecret)
+
+app.use(bodyParser.json()); // for parsing application/json
+
+// Used for testing purpose
+const testParams = {
+  number: '4242 4242 4242 4242',
+  expMonth: 12,
+  expYear: 21,
+  cvc: '123'
+}
 
 // Routes
-app.get('/', (req, res) => {
-  generateToken('4242 4242 4242 4242', 12, 21, '123');
-});
+app.get('/', (req, res) =>
+  generateToken(testParams) // Using test params, we should use `req.params`
+    .then(createCharge)
+    .then(charge => res.status(201).send({ charge }))
+    .catch(error => res.status(422).send({ error }))
+)
 
-app.listen(3000);
+/*
+  POST '/'
+  {
+    "number": "4242 4242 4242 4242",
+    "expMonth": 12,
+    "expYear": 21,
+    "cvc": "123"
+  }
+
+  Example :
+
+  curl -i \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{ "number": "4242 4242 4242 4242", "expMonth": 12, "expYear": 21, "cvc": "123" }' \
+    'http://localhost:3000'
+*/
+app.post('/', (req, res) =>
+  generateToken(req.body)
+    .then(createCharge)
+    .then(charge => res.status(201).json({ charge }))
+    .catch(error => res.status(422).json({ error }))
+)
+
+app.listen(3000)
 
 // Generate a card token
-const generateToken = (number, exp_month, exp_year, cvc) => {
+const generateToken = ({ number, expMonth, expYear, cvc }) =>
   stripe.tokens.create({
     card: {
       number,
-      exp_month,
-      exp_year,
+      exp_month: expMonth,
+      exp_year: expYear,
       cvc
     }
   })
-  .then(token => {
-    console.log(`Token: ${token.id}`);
-    createCharge(token);
-  })
-  .catch(err => {
-    console.log(`Error: ${err}`);
-  });
-};
 
 // Create charge with card token
-const createCharge = (token) => {
+const createCharge = token =>
   stripe.charges.create({
     amount: 2000,
     currency: 'eur',
-    source: "tok_visa", // doesn't work with `token`
+    source: token.id
   })
-  .then(charge => {
-    console.log(`Charge: ${charge.id}`);
-  })
-  .catch(err => {
-    console.log(err);
-  })
-}
