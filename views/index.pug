@@ -1,8 +1,9 @@
 html
   head
-    title= title
+    title Hello
+    link(href="/style.css", rel="stylesheet")
   body
-    h1= message
+    h1 Payment
     
     form(action='/charge', method='post')
       input(type='text', name='number', placeholder='4242 4242 4242 4242' value='4242 4242 4242 4242')

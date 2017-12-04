@@ -21,8 +21,8 @@ Create a `.env` file and store your Stripe keys (with [dotenv](https://github.co
 ```
 PUBLISHABLE_KEY=pk_test_******
 SECRET_KEY=sk_test_******
-
 ```
+
 Launch local server and visit `localhost:3000`:
 
 ```
@@ -39,5 +39,9 @@ node app.js
   - [x] Show status if error (`.catch`)
   - [x] Create form view
   - [x] Pass query parameters to Stripe token
-2. **OCTOBAT**
-3. **FRONT**
+  - [ ] Redirect page on success
+  - [ ] Show error if any
+2. **FRONT**
+  - [ ] Design form
+  - [ ] Design redirect page
+3. **OCTOBAT**
