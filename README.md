@@ -43,6 +43,6 @@ node app.js
   - [x] Show error if any
 2. **FRONT**
   - [x] Design form
-  - [ ] Front form validations
+  - [x] Front form validations
   - [x] Design redirect page
 3. **OCTOBAT**

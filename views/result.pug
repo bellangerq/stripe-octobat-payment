@@ -13,11 +13,11 @@ html
         p.result= charge.id
         ul.result-details
           li <strong>Amount: </strong>
-            = charge.amount / 100 + '€'
+            = `${charge.amount / 100}€`
           li <strong>Number: </strong>
-            = '**** **** **** ' + charge.source.last4
+            = `**** **** **** ${charge.source.last4}`
           li <strong>Expiration date: </strong>
-            = charge.source.exp_month + '/' + charge.source.exp_year
+            = `${charge.source.exp_month}/${charge.source.exp_year}`
           li <strong>CVC: </strong>***
       else
         h1 Error 🚫
