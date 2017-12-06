@@ -42,6 +42,8 @@ node app.js
   - [ ] Redirect page on success
   - [ ] Show error if any
 2. **FRONT**
-  - [ ] Design form
+  - [x] Design form
+  - [ ] Front form validations
+  - [ ] Form error messages
   - [ ] Design redirect page
 3. **OCTOBAT**
