@@ -1,14 +1,18 @@
 html
   head
     title Hello
-    link(href="/style.css", rel="stylesheet")
+    link(href='/style.css', rel='stylesheet')
   body
-    h1 Payment
-    
+    h1 Payment 💳
     form(action='/charge', method='post')
-      input(type='text', name='number', placeholder='4242 4242 4242 4242' value='4242 4242 4242 4242')
-      input(type='text', name='cvc', placeholder='CVC' value='123')
-      input(type='number', name='expMonth', placeholder='Expiration month' value='10')
-      input(type='number', name='expYear', placeholder='Expiration year' value='23')
-      input(type='text', name='amount', placeholder='Amount' value='300')
+      input(type='text', name='number', placeholder='Card number')
+      input(type='text', name='cvc', placeholder='CVC')
+      input(type='number', name='expMonth', placeholder='Exp month')
+      input(type='number', name='expYear', placeholder='Exp year')
+      input(type='text', name='amount', placeholder='Amount')
+      //- select
+        option(value='volvo') France
+        option(value='saab') UK
+        option(value='mercedes') Germany
+        option(value='audi') US
       input(type='submit')
