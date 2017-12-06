@@ -39,11 +39,10 @@ node app.js
   - [x] Show status if error (`.catch`)
   - [x] Create form view
   - [x] Pass query parameters to Stripe token
-  - [ ] Redirect page on success
-  - [ ] Show error if any
+  - [x] Redirect page on success
+  - [x] Show error if any
 2. **FRONT**
   - [x] Design form
   - [ ] Front form validations
-  - [ ] Form error messages
-  - [ ] Design redirect page
+  - [x] Design redirect page
 3. **OCTOBAT**

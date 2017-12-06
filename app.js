@@ -45,8 +45,10 @@ app.post('/charge', (req, res) =>
     .then(token => createCharge(token, req.body.amount * 100))
 
     // Render result
-    .then(charge => res.status(201).json({ charge }))
-    .catch(error => res.status(422).json({ error }))
+    .then(charge => res.render("result", { charge: charge }))
+    // res.status(201).json({ charge })
+    .catch(error => res.render("result", { error: error }))
+    // res.status(422).json({ error })
 )
 
 // Generate a card token
