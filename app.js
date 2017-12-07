@@ -25,33 +25,34 @@ app.use(sassMiddleware({
     force: true
 }))
 
-app.use('/public', express.static(path.join(__dirname, 'public')))
-
 // Html templating
 app.set('view engine', 'pug')
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.get('/', (req, res) => res.render('index'))
 app.post('/charge', (req, res) =>
 
-  // Pass form params to create new token
   generateToken({
     number: req.body.number,
     expMonth: req.body.expMonth,
     expYear: req.body.expYear,
     cvc: req.body.cvc
   })
-    // Create charge with form amount field
+
     .then(token => createCharge(token, req.body.amount * 100))
 
-    // Render result
-    .then(charge => res.render("result", { charge: charge }))
-    // res.status(201).json({ charge })
-    .catch(error => res.render("result", { error: error }))
-    // res.status(422).json({ error })
+    .then(charge => res.render(
+      "result", { charge: charge },
+      console.log(charge)
+    ))
+
+    .catch(error => res.render(
+      "result", { error: error },
+      console.log(error)
+    ))
 )
 
-// Generate a card token
 const generateToken = ({ number, expMonth, expYear, cvc }) =>
   stripe.tokens.create({
     card: {
@@ -62,7 +63,6 @@ const generateToken = ({ number, expMonth, expYear, cvc }) =>
     }
   })
 
-// Create charge with card token
 const createCharge = (token, amount) =>
   stripe.charges.create({
     amount: amount,
@@ -84,6 +84,6 @@ const createCharge = (token, amount) =>
   curl -i \
     -X POST \
     -H 'Content-Type: application/json' \
-    -d '{ "number": "4242 4242 4242 4242", "expMonth": 12, "expYear": 21, "cvc": "123" }' \
-    'http://localhost:3000'
+    -d '{ "number": "4242 4242 4242 4242", "expMonth": 12, "expYear": 21, "cvc": "123", "amount": 120 }' \
+    'http://localhost:3000/charge'
 */
