@@ -23,6 +23,8 @@ PUBLISHABLE_KEY=pk_test_******
 SECRET_KEY=sk_test_******
 ```
 
+Create an Octobat account and link it with your Stripe account.
+
 Launch local server and visit `localhost:3000`:
 
 ```

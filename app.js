@@ -40,7 +40,11 @@ app.post('/charge', (req, res) =>
     cvc: req.body.cvc
   })
 
-    .then(token => createCharge(token, req.body.amount * 100, req.body.country))
+    .then(token => createCharge(
+      token,
+      req.body.amount * 100,
+      req.body.country
+    ))
 
     .then(charge => res.render(
       "result", { charge: charge },
@@ -69,7 +73,8 @@ const createCharge = (token, amount, country) =>
     currency: 'eur',
     source: token.id,
     metadata: {
-      address_country: country
+      address_country: country,
+      tax_number: 'FR60528551658'
     }
   })
 
