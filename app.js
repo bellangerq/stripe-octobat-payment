@@ -40,7 +40,7 @@ app.post('/charge', (req, res) =>
     cvc: req.body.cvc
   })
 
-    .then(token => createCharge(token, req.body.amount * 100, 'FR'))
+    .then(token => createCharge(token, req.body.amount * 100, req.body.country))
 
     .then(charge => res.render(
       "result", { charge: charge },

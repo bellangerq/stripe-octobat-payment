@@ -47,6 +47,6 @@ node app.js
   - [x] Design redirect page
 3. **OCTOBAT**
   - [x] Add country in Stripe charge
-  - [ ] Add country selection in view
-  - [ ] Set chosen country to Octobat customer
+  - [x] Add country selection in view
+  - [x] Set chosen country to Octobat customer
   - [ ] Apply tax rate depending on customer country

@@ -12,10 +12,10 @@ html
         input(value='19' type='text', name='expYear', placeholder='Exp year' pattern='\\d{2}' title='Two last year\'s digits (17 for 2017)' required)
         input(value='123' type='text', name='cvc', placeholder='CVC' pattern='\\d{3}' title='Must be three digits' required)
         input(value='250' type='text', name='amount', placeholder='Amount' pattern='\\d*' title='Must be digits above 0' required)
-        //- select
+        select(name='country')
           option(value='', disabled, selected) Country
-          option(value='volvo') France
-          option(value='saab') UK
-          option(value='mercedes') Germany
-          option(value='audi') US
+          option(value='FR') France
+          option(value='IT') Italy
+          option(value='US') United States
+          option(value='DE') Germany
         input(type='submit')
