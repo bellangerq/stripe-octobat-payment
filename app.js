@@ -40,7 +40,7 @@ app.post('/charge', (req, res) =>
     cvc: req.body.cvc
   })
 
-    .then(token => createCharge(token, req.body.amount * 100))
+    .then(token => createCharge(token, req.body.amount * 100, 'FR'))
 
     .then(charge => res.render(
       "result", { charge: charge },
@@ -63,11 +63,14 @@ const generateToken = ({ number, expMonth, expYear, cvc }) =>
     }
   })
 
-const createCharge = (token, amount) =>
+const createCharge = (token, amount, country) =>
   stripe.charges.create({
     amount: amount,
     currency: 'eur',
-    source: token.id
+    source: token.id,
+    metadata: {
+      address_country: country
+    }
   })
 
 /*
