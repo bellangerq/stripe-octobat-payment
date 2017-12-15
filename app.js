@@ -73,8 +73,7 @@ const createCharge = (token, amount, country) =>
     currency: 'eur',
     source: token.id,
     metadata: {
-      address_country: country,
-      tax_number: 'FR60528551658'
+      address_country: country
     }
   })
 
