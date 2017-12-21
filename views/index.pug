@@ -1,0 +1,21 @@
+html
+  head
+    title Payment 💳
+    link(href='/style.css', rel='stylesheet')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body
+    .container
+      h1 Payment 💳
+      form(action='/charge', method='post')
+        input(value='4242 4242 4242 4242' type='text', name='number', placeholder='Card number' pattern='(\\d{4}\\s?){3}\\d{4}' title='Must be 4242 4242 4242 4242 or wihout spaces' required)
+        input(value='06' type='text', name='expMonth', placeholder='Exp month' pattern='0[1-9]|1[0-2]' title='Month\'s number (08 for August)' required)
+        input(value='19' type='text', name='expYear', placeholder='Exp year' pattern='\\d{2}' title='Two last year\'s digits (17 for 2017)' required)
+        input(value='123' type='text', name='cvc', placeholder='CVC' pattern='\\d{3}' title='Must be three digits' required)
+        input(value='250' type='text', name='amount', placeholder='Amount' pattern='\\d*' title='Must be digits above 0' required)
+        select(name='country')
+          option(value='', disabled, selected) Country
+          option(value='FR') France
+          option(value='IT') Italy
+          option(value='US') United States
+          option(value='DE') Germany
+        input(type='submit')

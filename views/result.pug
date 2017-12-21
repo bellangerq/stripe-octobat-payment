@@ -1,0 +1,24 @@
+html
+  head
+    if charge
+      title Success 🎉
+    else
+      title Error 🚫
+    link(href='/style.css', rel='stylesheet')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body
+    .container
+      if charge
+        h1 Success 🎉
+        p.result= charge.id
+        ul.result-details
+          li <strong>Amount: </strong>
+            = `${charge.amount / 100}€`
+          li <strong>Number: </strong>
+            = `**** **** **** ${charge.source.last4}`
+          li <strong>Expiration date: </strong>
+            = `${charge.source.exp_month}/${charge.source.exp_year}`
+          li <strong>CVC: </strong>***
+      else
+        h1 Error 🚫
+        p.result= error.message

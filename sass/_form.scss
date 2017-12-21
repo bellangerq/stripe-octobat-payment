@@ -1,0 +1,72 @@
+form {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 400px;
+  width: 90%;
+
+  input {
+    border: 1px solid darken($white, 10%);
+    font-size: 18px;
+    font-weight: lighter;
+    padding: 15px;
+    text-transform: uppercase;
+    width: 100%;
+
+    &::placeholder {
+      color: darken($white, 10%);
+    }
+
+    &:focus {
+      background: $color-main-dark;
+      border-color: transparent;
+      color: $white;
+      outline: none;
+    }
+
+    &[name=cvc],
+    &[name=expMonth] {
+      width: floor(33.33%);
+    }
+
+    &[name=expYear] {
+      width: ceil(33.33%);
+    }
+
+    &[type=submit] {
+      background: $color-main;
+      border: 0;
+      border-radius: 0;
+      color: $white;
+      transition: all .3s ease;
+
+      &:hover,
+      &:focus {
+        background: $color-main-dark;
+        cursor: pointer;
+      }
+    }
+  }
+
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: $white;
+    border: 1px solid darken($white, 10%);
+    border-radius: 0;
+    font-size: 18px;
+    font-weight: lighter;
+    padding: 15px;
+    text-transform: uppercase;
+    width: 100%;
+
+    &:focus {
+      background: $color-main-dark;
+      border-color: transparent;
+      color: $white;
+      outline: none;
+    }
+  }
+}

@@ -21,12 +21,14 @@ Create a `.env` file and store your Stripe keys (with [dotenv](https://github.co
 ```
 PUBLISHABLE_KEY=pk_test_******
 SECRET_KEY=sk_test_******
-
 ```
+
+Create an Octobat account and link it with your Stripe account.
+
 Launch local server and visit `localhost:3000`:
 
 ```
-node app.js
+npm start
 ```
 
 ## Roadmap
@@ -34,10 +36,19 @@ node app.js
 1. **STRIPE**
   - [x] Create Stripe token
   - [x] Create Stripe charge
-  - [ ] Associate token to charge
-  - [ ] Show Stripe charge token if success (`.then`)
-  - [ ] Show status if error (`.catch`)
-  - [ ] Create form view
-  - [ ] Pass query parameters to Stripe token
-2. **OCTOBAT**
-3. **FRONT**
+  - [x] Associate token to charge
+  - [x] Show Stripe charge token if success (`.then`)
+  - [x] Show status if error (`.catch`)
+  - [x] Create form view
+  - [x] Pass query parameters to Stripe token
+  - [x] Redirect page on success
+  - [x] Show error if any
+2. **FRONT**
+  - [x] Design form
+  - [x] Front form validations
+  - [x] Design redirect page
+3. **OCTOBAT**
+  - [x] Add country in Stripe charge
+  - [x] Add country selection in view
+  - [x] Set chosen country to Octobat customer
+  - [ ] Apply tax rate depending on customer country
