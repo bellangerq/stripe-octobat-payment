@@ -28,7 +28,7 @@ Create an Octobat account and link it with your Stripe account.
 Launch local server and visit `localhost:3000`:
 
 ```
-node app.js
+npm start
 ```
 
 ## Roadmap
