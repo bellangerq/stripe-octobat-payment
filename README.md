@@ -56,5 +56,5 @@ npm start
   - [x] Apply tax rate depending on customer country
   - [ ] Fetch tax rate in preview
 4. **MISC**
-  - [ ] [Deploy to Heroku]((https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
+  - [ ] [Deploy to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
   - [x] Get the [list of eligible countries](https://www.octobat.com/questions/zones-supported/)
