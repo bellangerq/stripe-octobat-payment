@@ -1,0 +1,33 @@
+.preview {
+  border-collapse: collapse;
+  font-size: 18px;
+  max-width: 400px;
+  width: 90%;
+
+  tbody {
+
+    tr:last-child {
+
+      td {
+        padding-bottom: 10px;
+      }
+    }
+
+    td:last-child {
+      text-align: right;
+    }
+  }
+
+  tfoot {
+    border-top: 1px solid $black;
+    font-weight: bold;
+
+    tr td {
+      padding-top: 10px;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}

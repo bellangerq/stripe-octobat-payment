@@ -4,6 +4,16 @@
   padding: 15px;
 }
 
+.back {
+  color: $black;
+  font-size: 18px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .result-details {
   list-style-type: none;
   padding: 0;

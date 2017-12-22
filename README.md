@@ -47,7 +47,7 @@ npm run server
   - [x] Design form
   - [x] Front form validations
   - [x] Design redirect page
-  - [ ] Display preview before payment
+  - [x] Display preview before payment
   - [ ] Show amount with & without tax
 3. **OCTOBAT**
   - [x] Add country in Stripe charge
@@ -56,5 +56,5 @@ npm run server
   - [x] Apply tax rate depending on customer country
   - [ ] Fetch tax rate in preview
 4. **MISC**
-  - [ ] [Deploy to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
+  - [x] [Deploy to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
   - [x] Get the [list of eligible countries](https://www.octobat.com/questions/zones-supported/)
