@@ -13,11 +13,13 @@ html
         input(value='123' type='text', name='cvc', placeholder='CVC' pattern='\\d{3}' title='Must be three digits' required)
         input(value='250' type='text', name='amount', placeholder='Amount' pattern='\\d*' title='Must be digits above 0' required)
         select(name='country')
-          option(value='', disabled, selected) Country
+          option(value='AU') Australia
+          option(value='CA') Canada
           option(value='FR') France
-          option(value='IT') Italy
-          option(value='US') United States
           option(value='DE') Germany
+          option(value='IT') Italy
+          option(value='UK') United Kingdom
+          option(value='US') United States
         input(type='submit')
       table.preview
         tbody
@@ -30,4 +32,7 @@ html
         tfoot
           tr
             td Total
-            td 250 €
+            td
+              span.total
+              |  €
+    script(src='public/preview.js')
