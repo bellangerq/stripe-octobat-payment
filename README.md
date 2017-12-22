@@ -31,6 +31,11 @@ Launch local server and visit `localhost:3000`:
 npm run server
 ```
 
+Compile ES5 to ES6 with Babel:
+```
+npm run build
+```
+
 ## Roadmap
 
 1. **STRIPE**
