@@ -1,7 +1,7 @@
 html
   head
     title Payment 💳
-    link(href='/style.css', rel='stylesheet')
+    link(href='style.css', rel='stylesheet')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
   body
     .container
@@ -21,24 +21,25 @@ html
           option(value='UK') United Kingdom
           option(value='US') United States
         input(type='submit')
-      table.preview
-        tbody
-          tr
-            td Excl. taxes
-            td 
-              span.excl-tax
-              |  €
-          tr
-            td Taxes (
-              span.tax-rate 22.0
-              | %)
-            td
-              span.tax-amount
-              |  €
-        tfoot
-          tr
-            td Total
-            td
-              span.total
-              |  €
+      .preview
+        table
+          tbody
+            tr
+              td Sub total
+              td 
+                span.sub-total
+                |  €
+            tr
+              td Taxes (
+                span.tax-rate 22.0
+                | %)
+              td
+                span.tax-amount
+                |  €
+          tfoot
+            tr
+              td Total
+              td
+                span.total
+                |  €
     script(src='public/preview.js')

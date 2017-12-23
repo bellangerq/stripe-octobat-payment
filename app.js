@@ -74,21 +74,3 @@ const createCharge = (token, amount, country) =>
       address_country: country
     }
   })
-
-/*
-  POST '/'
-  {
-    "number": "4242 4242 4242 4242",
-    "expMonth": 12,
-    "expYear": 21,
-    "cvc": "123"
-  }
-
-  Example :
-
-  curl -i \
-    -X POST \
-    -H 'Content-Type: application/json' \
-    -d '{ "number": "4242 4242 4242 4242", "expMonth": 12, "expYear": 21, "cvc": "123", "amount": 120 }' \
-    'http://localhost:3000/charge'
-*/
