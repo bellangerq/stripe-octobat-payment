@@ -11,7 +11,7 @@ html
         input(value='06' type='text', name='expMonth', placeholder='Exp month' pattern='0[1-9]|1[0-2]' title='Month\'s number (08 for August)' required)
         input(value='19' type='text', name='expYear', placeholder='Exp year' pattern='\\d{2}' title='Two last year\'s digits (17 for 2017)' required)
         input(value='123' type='text', name='cvc', placeholder='CVC' pattern='\\d{3}' title='Must be three digits' required)
-        input(value='250' type='text', name='amount', placeholder='Amount' pattern='\\d*' title='Must be digits above 0' required)
+        input(value='250' type='text', name='amount', placeholder='Amount' pattern='[1-9]\\d*(\\.\\d+)?' title='Must be an amount above 0' required)
         select(name='country')
           option(value='AU') Australia
           option(value='CA') Canada
@@ -25,10 +25,16 @@ html
         tbody
           tr
             td Excl. taxes
-            td 204.92 €
+            td 
+              span.excl-tax
+              |  €
           tr
-            td Taxes (22.0 %)
-            td 45.08 €
+            td Taxes (
+              span.tax-rate 22.0
+              | %)
+            td
+              span.tax-amount
+              |  €
         tfoot
           tr
             td Total
