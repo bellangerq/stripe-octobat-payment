@@ -28,12 +28,7 @@ Create an Octobat account and link it with your Stripe account.
 Launch local server and visit `localhost:3000`:
 
 ```
-npm run server
-```
-
-Compile ES5 to ES6 with Babel:
-```
-npm run build
+npm start
 ```
 
 ## Roadmap

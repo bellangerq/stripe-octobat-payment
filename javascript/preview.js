@@ -9,7 +9,7 @@ total.innerHTML = parseInt(amount).toFixed(2)
 subTotal.innerHTML = (amount - amount * taxRate).toFixed(2)
 taxAmount.innerHTML = (amount * taxRate).toFixed(2)
 
-amountInput.addEventListener('blur', () => {
+amountInput.addEventListener('keyup', () => {
   amount = amountInput.value
   total.innerHTML = parseInt(amount).toFixed(2)
   subTotal.innerHTML = (amount - amount * taxRate).toFixed(2)

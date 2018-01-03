@@ -11,7 +11,7 @@ total.innerHTML = parseInt(amount).toFixed(2);
 subTotal.innerHTML = (amount - amount * taxRate).toFixed(2);
 taxAmount.innerHTML = (amount * taxRate).toFixed(2);
 
-amountInput.addEventListener('blur', function () {
+amountInput.addEventListener('keyup', function () {
   amount = amountInput.value;
   total.innerHTML = parseInt(amount).toFixed(2);
   subTotal.innerHTML = (amount - amount * taxRate).toFixed(2);
