@@ -2,15 +2,27 @@
   "name": "technical-test",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
+  "engines": {
+    "node": "9.3.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "concurrently \"npm run server\" \"npm run build\" --names \"💻,📦\" --prefix name",
+    "server": "nodemon app.js",
+    "build": "babel ./javascript  --watch --out-dir public/ --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bellangerq/technical-test"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "node-sass-middleware": "^0.11.0",

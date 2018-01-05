@@ -1,0 +1,10 @@
+html
+  head
+    title Error 🚫
+    link(href='/style.css', rel='stylesheet')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body
+    .container
+      h1 Error 🚫
+      p.result= error.message
+      a.back(href="/", title="Try again") &#8592; Try again

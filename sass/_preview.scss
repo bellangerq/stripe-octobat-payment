@@ -1,0 +1,35 @@
+.preview {
+  background: $white;
+  padding: 15px;
+}
+
+table {
+  border-collapse: collapse;
+  font-size: 18px;
+  width: 100%;
+
+  tbody {
+    tr:last-child {
+      td {
+        padding-bottom: 10px;
+      }
+    }
+
+    td:last-child {
+      text-align: right;
+    }
+  }
+
+  tfoot {
+    border-top: 1px solid $black;
+    font-weight: bold;
+
+    tr td {
+      padding-top: 10px;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+}
