@@ -39,7 +39,10 @@ app.get('/', (req, res) => {
 
   computeVAT(price, country)
     .then(tax_rate => {
-      res.render('index', { tax_rate })
+      res.render('index', {
+        title: 'Payment 💳',
+        tax_rate
+      })
     })
 })
 
@@ -59,11 +62,17 @@ app.post('/charge', (req, res) =>
     ))
 
     .then(charge => res.render(
-      "success", { charge: charge }
+      "success", {
+        title: 'Success 🎉',
+        charge: charge
+      }
     ))
 
     .catch(error => res.render(
-      "error", { error: error }
+      "error", {
+        title: 'Error 🚫',
+        error: error
+      }
     ))
 )
 

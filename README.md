@@ -55,7 +55,7 @@ npm start
   - [x] Set chosen country to Octobat customer
   - [x] Apply tax rate depending on customer country
   - [ ] Fetch tax rate in preview
-  - [ ] Make POST https://apiv2.octobat.com/tax_evidence_requests request on page load with default country
+  - [x] Make POST https://apiv2.octobat.com/tax_evidence_requests request on page load with default country
   - [ ] Make POST https://apiv2.octobat.com/tax_evidence_requests request on `select` changes with selected country
   - [ ] Update tax rate thanks to tax_evidence object
 4. **MISC**

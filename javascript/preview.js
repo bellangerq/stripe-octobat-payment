@@ -1,3 +1,4 @@
+// Compute amounts
 const amountInput = document.querySelector('input[name=amount]')
 let amount = parseInt(amountInput.value)
 const total = document.querySelector('.total')
@@ -14,4 +15,12 @@ amountInput.addEventListener('keyup', () => {
   subTotal.innerHTML = amount.toFixed(2)
   taxAmount.innerHTML = (amount * taxRate).toFixed(2)
   total.innerHTML = (amount + amount * taxRate).toFixed(2)
+})
+
+// Update tax rate depending on country
+const select = document.querySelector('select')
+
+select.addEventListener('change', (e) => {
+  let country = select.value
+  console.log(country)
 })
