@@ -38,10 +38,11 @@ app.get('/', (req, res) => {
   const country = 'AU'
 
   computeVAT(price, country)
-    .then(tax_rate => {
+    .then(data => {
       res.render('index', {
         title: 'Payment 💳',
-        tax_rate
+        tax_rate: data.applied_rate,
+        tev_id: data.id
       })
     })
 })
@@ -58,15 +59,20 @@ app.post('/charge', (req, res) =>
     .then(token => createCharge(
       token,
       req.body.amount * 100,
-      req.body.country
+      req.body.country,
+      req.body.tev_id
     ))
 
-    .then(charge => res.render(
-      "success", {
-        title: 'Success 🎉',
-        charge: charge
-      }
-    ))
+    .then(charge => {
+      getTaxEvidence(charge.metadata.tax_evidence)
+        .then(tev => {
+          res.render('success', {
+            title: 'Success 🎉',
+            charge: charge,
+            tev
+          })
+        })
+    })
 
     .catch(error => res.render(
       "error", {
@@ -86,13 +92,14 @@ const generateToken = ({ number, expMonth, expYear, cvc }) =>
     }
   })
 
-const createCharge = (token, amount, country) =>
+const createCharge = (token, amount, country, tev_id) =>
   stripe.charges.create({
     amount: amount,
     currency: 'eur',
     source: token.id,
     metadata: {
-      address_country: country
+      address_country: country,
+      tax_evidence: tev_id
     }
   })
 
@@ -110,10 +117,26 @@ const computeVAT = (price, country) => {
     }
   })
   .then(response => {
-    return response.data.applied_rate
+    return response.data
   })
   .catch(error => {
     console.log(error.response.data.errors)
+  })
+}
+
+const getTaxEvidence = id => {
+  return axios({
+    method: 'get',
+    url: `https://apiv2.octobat.com/tax_evidences/${id}`,
+    auth: {
+      username: process.env.OCTOBAT_SECRET_KEY
+    }
+  })
+  .then(response => {
+    return response.data
+  })
+  .catch(error => {
+    console.log(error)
   })
 }
 

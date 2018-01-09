@@ -9,20 +9,20 @@ block content
         tr
           td Sub total
           td 
-            span.sub-total XX
+            span.sub-total= charge.amount / 100
             |  €
         tr
           td Taxes (
-            span.tax-rate XX.X
+            span.tax-rate= tev.applied_rate
             | %)
           td
-            span.tax-amount XX
+            span.tax-amount
             |  €
       tfoot
         tr
           td Total
           td
-            span.total= charge.amount / 100
+            span.total
             |  €
     h2 Card details
     table
@@ -36,3 +36,4 @@ block content
         tr
           td CVC
           td ***
+  script(src='public/summary.js')

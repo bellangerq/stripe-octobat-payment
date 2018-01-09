@@ -17,6 +17,7 @@ block content
       option(value='UK') United Kingdom
       option(value='US') United States
     input(type='submit')
+    input(value=tev_id name='tev_id' type='hidden')
   .preview
     table
       tbody
@@ -38,3 +39,4 @@ block content
           td
             span.total
             |  €
+  script(src='public/preview.js')
