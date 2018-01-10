@@ -1,42 +1,39 @@
-html
-  head
-    title Success 🎉
-    link(href='/style.css', rel='stylesheet')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-  body
-    .container
-      h1 Success 🎉
-      .result
-        h2 Payment info
-        table
-          tbody
-            tr
-              td Sub total
-              td 
-                span.sub-total XX
-                |  €
-            tr
-              td Taxes (
-                span.tax-rate XX.X
-                | %)
-              td
-                span.tax-amount XX
-                |  €
-          tfoot
-            tr
-              td Total
-              td
-                span.total= charge.amount / 100
-                |  €
-        h2 Card details
-        table
-          tbody
-            tr
-              td Number
-              td= `**** **** **** ${charge.source.last4}`
-            tr
-              td Expiration date
-              td= `${charge.source.exp_month}/${charge.source.exp_year}`
-            tr
-              td CVC
-              td ***
+extends layout
+
+block content
+  h1 Success 🎉
+  .result
+    h2 Payment info
+    table
+      tbody
+        tr
+          td Sub total
+          td 
+            span.sub-total= charge.amount / 100
+            |  €
+        tr
+          td Taxes (
+            span.tax-rate= tev.applied_rate
+            | %)
+          td
+            span.tax-amount
+            |  €
+      tfoot
+        tr
+          td Total
+          td
+            span.total
+            |  €
+    h2 Card details
+    table
+      tbody
+        tr
+          td Number
+          td= `**** **** **** ${charge.source.last4}`
+        tr
+          td Expiration date
+          td= `${charge.source.exp_month}/${charge.source.exp_year}`
+        tr
+          td CVC
+          td ***
+  script(src='public/summary.js')
