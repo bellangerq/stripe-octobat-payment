@@ -56,30 +56,30 @@ app.post('/charge', (req, res) =>
     cvc: req.body.cvc
   })
 
-    .then(token => createCharge(
-      token,
-      req.body.amount * 100,
-      req.body.country,
-      req.body.tev_id
-    ))
+  .then(token => createCharge(
+    token,
+    req.body.amount * 100,
+    req.body.country,
+    req.body.tev_id
+  ))
 
-    .then(charge => {
-      getTaxEvidence(charge.metadata.tax_evidence)
-        .then(tev => {
-          res.render('success', {
-            title: 'Success 🎉',
-            charge: charge,
-            tev
-          })
+  .then(charge => {
+    getTaxEvidence(charge.metadata.tax_evidence)
+      .then(tev => {
+        res.render('success', {
+          title: 'Success 🎉',
+          charge: charge,
+          tev
         })
-    })
+      })
+  })
 
-    .catch(error => res.render(
-      "error", {
-        title: 'Error 🚫',
-        error: error
-      }
-    ))
+  .catch(error => res.render(
+    "error", {
+      title: 'Error 🚫',
+      error: error
+    }
+  ))
 )
 
 const generateToken = ({ number, expMonth, expYear, cvc }) =>
@@ -103,6 +103,7 @@ const createCharge = (token, amount, country, tev_id) =>
     }
   })
 
+app.post('compute_vat', (req, res) => computeVAT(req.params.price, req.params.country).then(res.render))
 const computeVAT = (price, country) => {
   return axios({
     method: 'post',

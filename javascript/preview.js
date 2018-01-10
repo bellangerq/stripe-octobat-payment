@@ -23,4 +23,19 @@ const select = document.querySelector('select')
 select.addEventListener('change', (e) => {
   let country = select.value
   console.log(country)
+
+  select.disabled = true
+
+  // Call API
+  const XHR = XMLHttpRequest()
+  XHR.url = 'http://localhost:3000/computeVAT'
+  XHR.method = 'POST'
+  XHR.success = vat => {
+    document.getElementById('VAT').innerHTML = vat
+    select.disabled = false
+  }
+  XHR.failure = error => {
+    alert(error)
+    select.disabled = false
+  }
 })
