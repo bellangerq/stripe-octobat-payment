@@ -48,16 +48,17 @@ npm start
   - [x] Front form validations
   - [x] Design redirect page
   - [x] Display preview before payment
-  - [ ] Show amount with & without tax
+  - [x] Show amount with & without tax
+  - [x] Show spinner on load
 3. **OCTOBAT**
   - [x] Add country in Stripe charge
   - [x] Add country selection in view
   - [x] Set chosen country to Octobat customer
   - [x] Apply tax rate depending on customer country
-  - [ ] Fetch tax rate in preview
+  - [x] Fetch tax rate in preview
   - [x] Make POST https://apiv2.octobat.com/tax_evidence_requests request on page load with default country
-  - [ ] Make POST https://apiv2.octobat.com/tax_evidence_requests request on `select` changes with selected country
-  - [ ] Update tax rate thanks to tax_evidence object
+  - [x] Make POST https://apiv2.octobat.com/tax_evidence_requests request on `select` changes with selected country
+  - [x] Update tax rate thanks to tax_evidence object
 4. **MISC**
   - [x] [Deploy to Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
   - [x] Get the [list of eligible countries](https://www.octobat.com/questions/zones-supported/)

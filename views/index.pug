@@ -16,7 +16,9 @@ block content
       option(value='IT') Italy
       option(value='UK') United Kingdom
       option(value='US') United States
-    input(type='submit')
+    .submit
+      input(type='submit')
+      .loader
     input(value=tev_id name='tev_id' type='hidden')
   .preview
     table
@@ -40,3 +42,4 @@ block content
             span.total
             |  €
   script(src='public/preview.js')
+  script(src='public/loader.js')
