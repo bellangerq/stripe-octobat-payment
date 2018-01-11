@@ -24,7 +24,7 @@ const select = document.querySelector('select')
 select.addEventListener('change', (e) => {
   select.disabled = true
 
-  fetch('http://localhost:3000/compute_vat', {
+  fetch('https://stripe-octobat-payment.herokuapp.com/compute_vat', {
     method: 'post',
     headers: {
       "Content-Type": "application/json"
