@@ -38,13 +38,21 @@ app.get('/', (req, res) => {
   const country = 'AU'
 
   computeVAT(price, country)
-    .then(data => {
-      res.render('index', {
-        title: 'Payment 💳',
-        tax_rate: data.applied_rate,
-        tev_id: data.id
-      })
+  .then(data => {
+    res.render('index', {
+      title: 'Payment 💳',
+      tax_rate: data.applied_rate,
+      tev_id: data.id
     })
+  })
+})
+
+app.post('/compute_vat', (req, res) => {
+  computeVAT(req.body.amount, req.body.country)
+  .then(data => {
+    res.json(data)
+    return data
+  })
 })
 
 app.post('/charge', (req, res) =>
@@ -56,32 +64,33 @@ app.post('/charge', (req, res) =>
     cvc: req.body.cvc
   })
 
-    .then(token => createCharge(
-      token,
-      req.body.amount * 100,
-      req.body.country,
-      req.body.tev_id
-    ))
+  .then(token => createCharge(
+    token,
+    req.body.amount * 100,
+    req.body.country,
+    req.body.tev_id
+  ))
 
-    .then(charge => {
-      getTaxEvidence(charge.metadata.tax_evidence)
-        .then(tev => {
-          res.render('success', {
-            title: 'Success 🎉',
-            charge: charge,
-            tev
-          })
-        })
+  .then(charge => {
+    getTaxEvidence(charge.metadata.tax_evidence)
+    .then(tev => {
+      res.render('success', {
+        title: 'Success 🎉',
+        charge: charge,
+        tev
+      })
     })
+  })
 
-    .catch(error => res.render(
-      "error", {
-        title: 'Error 🚫',
-        error: error
-      }
-    ))
+  .catch(error => res.render(
+    "error", {
+      title: 'Error 🚫',
+      error: error
+    }
+  ))
 )
 
+// Generate Stripe token == credit card
 const generateToken = ({ number, expMonth, expYear, cvc }) =>
   stripe.tokens.create({
     card: {
@@ -92,6 +101,7 @@ const generateToken = ({ number, expMonth, expYear, cvc }) =>
     }
   })
 
+// Generate Stripe charge with octobat metadata
 const createCharge = (token, amount, country, tev_id) =>
   stripe.charges.create({
     amount: amount,
@@ -103,6 +113,7 @@ const createCharge = (token, amount, country, tev_id) =>
     }
   })
 
+// Compute Octobat VAT rate depending on country
 const computeVAT = (price, country) => {
   return axios({
     method: 'post',
@@ -124,6 +135,7 @@ const computeVAT = (price, country) => {
   })
 }
 
+// Get last Octobat tax_evidence on success
 const getTaxEvidence = id => {
   return axios({
     method: 'get',
