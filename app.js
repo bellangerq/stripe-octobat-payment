@@ -34,10 +34,10 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.get('/', (req, res) => {
-  const price = 250
-  const country = 'AU'
+  const initialPrice = 250
+  const initialCountry = 'AU'
 
-  computeVAT(price, country)
+  computeVAT(initialPrice, initialCountry)
   .then(data => {
     res.render('index', {
       title: 'Payment 💳',
@@ -55,8 +55,7 @@ app.post('/compute_vat', (req, res) => {
   })
 })
 
-app.post('/charge', (req, res) =>
-
+app.post('/charge', (req, res) => {
   generateToken({
     number: req.body.number,
     expMonth: req.body.expMonth,
@@ -74,6 +73,9 @@ app.post('/charge', (req, res) =>
   .then(charge => {
     getTaxEvidence(charge.metadata.tax_evidence)
     .then(tev => {
+      tev.customer_evidence.payment_source.country = req.body.country
+      tev.customer_localization.country = req.body.country
+      console.log(tev)
       res.render('success', {
         title: 'Success 🎉',
         charge: charge,
@@ -88,7 +90,7 @@ app.post('/charge', (req, res) =>
       error: error
     }
   ))
-)
+})
 
 // Generate Stripe token == credit card
 const generateToken = ({ number, expMonth, expYear, cvc }) =>
@@ -151,19 +153,3 @@ const getTaxEvidence = id => {
     console.log(error)
   })
 }
-
-/*
-  // Calcul VAT for index page
-  app.get('/', (req, res) => {
-    const initialPrice = 250
-    const country = 'AU'
-    return computeVAT(initialPrice, country).then(vat => res.render('index'))
-  })
-
-  // Calcul VAT on select change
-  app.post('/calcul_vat', (req, res) => {
-    return computeVAT(req.params.price, req.params.country).then(vat => {
-      res.render({ vat: '0.22' })
-    })
-  })
-*/

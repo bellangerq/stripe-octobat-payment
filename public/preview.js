@@ -36,10 +36,16 @@ select.addEventListener('change', function (e) {
     return response.json();
   }).then(function (vat) {
     select.disabled = false;
+
+    // Compute amounts
     taxRate = vat.applied_rate;
     taxRateContainer.innerHTML = taxRate;
     taxAmount.innerHTML = (amount * (taxRate / 100)).toFixed(2);
     total.innerHTML = (amount + amount * (taxRate / 100)).toFixed(2);
+
+    // Update tax_evidence id
+    var tev = document.querySelector("input[name='tev_id']");
+    tev.value = vat.id;
   }).catch(function (error) {
     console.log(error);
     select.disabled = false;
